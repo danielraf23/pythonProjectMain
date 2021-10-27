@@ -14,14 +14,16 @@ class Player:
     def __repr__(self):
         return f"{self.name}, {self.num_of_cards} {self.pack_of_cards}"
 
+    # gets a deck of card from DeckOfCards and gives random cards to player without returning anything
     def set_hand(self, deck_of_cards:DeckOfCards):
         for i in range(self.num_of_cards):
             self.pack_of_cards.append(deck_of_cards.deal_one())
 
-
+    # draw a random card from the pack
     def get_card(self):
         return random.choice(self.pack_of_cards)
 
+    # gets a card and inserts it to the player pack
     def add_card(self, card:Card):
         self.pack_of_cards.append(card)
 
