@@ -20,15 +20,18 @@ class Player:
 
 
     def get_card(self):
-        for i in random.choice(self.pack_of_cards):
-            return i
+        return random.choice(self.pack_of_cards)
+
+    def add_card(self, card:Card):
+        self.pack_of_cards.append(card)
 
 
-
+card=Card
 deck=DeckOfCards()
 player=Player("tov",10)
 player.set_hand(deck)
 player.get_card()
+print(player.get_card())
 print(player)
 
 
