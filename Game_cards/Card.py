@@ -31,3 +31,18 @@ if __name__=="__main__":
     Card2 = Card(ace[1],'Spade')
 
     print(Card1.__gt__(Card2))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
