@@ -17,7 +17,8 @@ class Player:
     # gets a deck of card from DeckOfCards and gives random cards to player without returning anything
     def set_hand(self, deck_of_cards:DeckOfCards):
         for i in range(self.num_of_cards):
-            self.pack_of_cards.append(deck_of_cards.deal_one())
+            if i not in self.pack_of_cards:
+                self.pack_of_cards.append(deck_of_cards.deal_one())
 
     # draw a random card from the pack
     def get_card(self):
@@ -28,12 +29,13 @@ class Player:
         self.pack_of_cards.append(card)
 
 
-card=Card(9,"Diamond")
-deck=DeckOfCards()
-player=Player("tov",10)
-player.set_hand(deck)
-player.get_card()
-print(player.add_card(card))
-print(player)
+if __name__ == "__main__":
+    card=Card(9,"Diamond")
+    deck=DeckOfCards()
+    player=Player("tov",10)
+    player.set_hand(deck)
+    player.get_card()
+    print(player.add_card(card))
+    print(player)
 
 
