@@ -17,6 +17,7 @@ class DeckOfCards:
     def cards_shuffle(self):
         random.shuffle(self.Deck_of_cards)
 
+    #gets one card from the pack
     def deal_one(self):
         rand_num = random.choice(self.Deck_of_cards)
         self.Deck_of_cards.remove(rand_num)

@@ -12,30 +12,21 @@ class Player:
         self.pack_of_cards=[]
 
     def __repr__(self):
-        return f"{self.name}, {self.num_of_cards} {self.pack_of_cards}"
+        return f"{self.name}, {len(self.pack_of_cards)} {self.pack_of_cards}"
 
-    # gets a deck of card from DeckOfCards and gives random cards to player without returning anything
+    # a method that deals cards to player
     def set_hand(self, deck_of_cards:DeckOfCards):
         for i in range(self.num_of_cards):
-            if i not in self.pack_of_cards:
-                self.pack_of_cards.append(deck_of_cards.deal_one())
+            self.pack_of_cards.append(deck_of_cards.deal_one())
 
-    # draw a random card from the pack
+    # a method that takes out a random card from player's hand
     def get_card(self):
         return random.choice(self.pack_of_cards)
 
-    # gets a card and inserts it to the player pack
+    # a method that add one card to player's hand
     def add_card(self, card:Card):
         self.pack_of_cards.append(card)
 
 
-if __name__ == "__main__":
-    card=Card(9,"Diamond")
-    deck=DeckOfCards()
-    player=Player("tov",10)
-    player.set_hand(deck)
-    player.get_card()
-    print(player.add_card(card))
-    print(player)
 
 
