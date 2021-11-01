@@ -7,15 +7,26 @@ class TestDeckOfCards(TestCase):
 
     def setUp(self):
         print('Set Up')
-        deck1=DeckOfCards()
+        self.deck1=DeckOfCards()
 
+    def tearDown(self):
+        print("tearDown")
 
+    # check that there are 52 cards in a deck
     def test__init__(self):
+        print(self.deck1.Deck_of_cards)
+        self.card=Card(9,'🔶')
+        self.assertEqual(len(self.deck1.Deck_of_cards),52)
+        self.assertIn(self.card, self.deck1.Deck_of_cards)
 
-
-
+    # check the cards_shuffle method, shuffled deck isn't equal to regular deck
     def test_cards_shuffle(self):
-        self.fail()
+        self.deck2= DeckOfCards()
+        self.assertNotEqual(self.deck1.cards_shuffle(),self.deck1.Deck_of_cards)
+        self.assertNotEqual(self.deck2.Deck_of_cards[5],self.deck1.Deck_of_cards[5])
 
+    # check the deal_one method, the pulled card won't be in the deck anymore
     def test_deal_one(self):
-        self.fail()
+        self.card=self.deck1.deal_one()
+        self.assertNotIn(self.card,self.deck1.Deck_of_cards)
+

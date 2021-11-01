@@ -23,12 +23,16 @@ class DeckOfCards:
         self.Deck_of_cards.remove(rand_num)
         return rand_num
 
+    def __repr__(self):
+        return f"{self.Deck_of_cards}"
+
 
 if __name__=="__main__":
     deck1 = DeckOfCards()
     print(deck1.Deck_of_cards)
     deck1.cards_shuffle()
-    print(deck1.Deck_of_cards)
+    print(deck1)
+    deck1.deal_one()
     print(deck1.deal_one())
 
 
