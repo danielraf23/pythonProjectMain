@@ -8,11 +8,15 @@ class Category:
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
 
-    def get_into_product(self):
+    def product(self):
         return self.driver.find_elements(By.CSS_SELECTOR, "[class ='cell categoryRight'] > ul > li")
 
+    # get a number and click on the index of it on the products list
     def click_on_product(self, num):
-        self.get_into_product()[num].click()
+        self.product()[num].click()
 
-    def back_to_homepage(self):
-        return self.driver.find_element(By.CSS_SELECTOR,'a[translate="HOME"]')
+    def category_element(self):
+        return self.driver.find_element(By.CSS_SELECTOR, ".categoryTitle")
+
+    def category_name(self):
+        return self.category_element().text

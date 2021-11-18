@@ -1,14 +1,13 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 
 
 class Account:
     def __init__(self, driver):
         self.driver = driver
-        wait = WebDriverWait(self.driver, 10)
+        self.wait = WebDriverWait(self.driver, 10)
 
     def username(self):
         return self.driver.find_element(By.CSS_SELECTOR,'[name="usernameRegisterPage"]')
@@ -34,6 +33,7 @@ class Account:
     def country(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="countryListboxRegisterPage"]')
 
+    # get a country and select it from country select field
     def select_country(self, country):
         select_country = Select(self.country())
         select_country.select_by_visible_text(country)
@@ -71,32 +71,33 @@ class Account:
     def signIn_button(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[type="button"]')
 
+    def click_sign_in(self):
+        self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '[type="button"]')))
+        self.signIn_button().click()
+
+    def x_button_pop_up(self):
+        self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "loginPopUpCloseBtn")))
+        return self.driver.find_element(By.CLASS_NAME, "loginPopUpCloseBtn")
+
     def loggedIn_username(self):
         return self.driver.find_element(By.CSS_SELECTOR, "#menuUserLink>span")
 
+    # wait until the username text to be presented in element
+    def wait_username_text(self):
+        self.wait.until_not(EC.text_to_be_present_in_element((By.CSS_SELECTOR, '#menuUserLink>[data-ng-show="userCookie.response"]'),self.loggedIn_username().text))
+
     def user_menu(self):
-        return self.driver.find_element(By.CSS_SELECTOR, "#menuUserLink>div>label")
+        return self.driver.find_elements(By.CSS_SELECTOR, "#menuUserLink>div>label")
 
     def user_menu_options(self, number):
         return self.user_menu()[number].get_attribute("innerHTML")
 
-    def user_manu_2(self):
-        return self.driver.find_element(By.ID,'menuUser')
-
-    def my_orders(self):
-        return self.driver.find_element(By.CSS_SELECTOR,"li>a>div>label[translate='My_Orders']")
-
     def delete_account(self):
-        return self.driver.find_element(By.CSS_SELECTOR,'div[class="deleteBtnText"]')
+        return self.driver.find_element(By.CSS_SELECTOR, '[class="deleteMainBtnContainer a-button ng-scope"]')
 
     def confirm_delete(self):
-        return self.driver.find_element(By.CSS_SELECTOR,'div[class="deletePopupBtn deleteRed"]')
-
-    def regretting_delete(self):
-        return self.driver.find_element(By.CSS_SELECTOR,'div[class="deletePopupBtn deleteGreen"]')
-
-    def validation_of_logout(self):
-        return self.driver.find_element(By.CSS_SELECTOR,'div[class="displayed"]')
+        self.delete_account().click()
+        return self.driver.find_element(By.CSS_SELECTOR, 'div[class="deletePopupBtn deleteRed"]')
 
 
 
